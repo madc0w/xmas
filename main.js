@@ -8,6 +8,7 @@ const numCells = 6 * 6;
 let score = 0;
 
 function load() {
+	document.getElementById('score').innerText = score;
 	const grid = document.querySelector('#grid');
 	for (let i = 0; i < numCells; i++) {
 		const div = document.createElement('div');
@@ -57,6 +58,8 @@ function showImage() {
 	// div.style.backgroundImage = `url(img/${image})`;
 	// console.log('div.style', div.style);
 	div.appendChild(img);
+
+	// div.style.cursor = 'url("img/x.ico"), pointer';
 	div.style.cursor = 'pointer';
 	setTimeout(() => {
 		if (
