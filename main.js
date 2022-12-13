@@ -19,15 +19,21 @@ function load() {
 			const img = div.firstChild;
 			if (img) {
 				const imgSrc = img.getAttribute('src');
-				if (goodImages.includes(imgSrc.substring('img/'.length))) {
-					score++;
-				} else {
-					score--;
-					score = Math.max(0, score);
-				}
-				document.getElementById('score').innerText = score;
 				div.innerHTML = null;
 				div.style.cursor = null;
+				const img2 = new Image();
+				if (goodImages.includes(imgSrc.substring('img/'.length))) {
+					score++;
+					img2.src = 'img/mushroom-cloud.gif';
+				} else {
+					score = Math.max(0, score - 1);
+					img2.src = 'img/Sad-Santa small.jpg';
+				}
+				div.appendChild(img2);
+				setTimeout(() => {
+					div.innerHTML = null;
+				}, 1800);
+				document.getElementById('score').innerText = score;
 			}
 		});
 	}
@@ -53,7 +59,13 @@ function showImage() {
 	div.appendChild(img);
 	div.style.cursor = 'pointer';
 	setTimeout(() => {
-		div.style.cursor = null;
-		div.innerHTML = null;
+		if (
+			!['img/Sad-Santa small.jpg', 'img/mushroom-cloud.gif'].includes(
+				div.firstChild?.getAttribute('src')
+			)
+		) {
+			div.style.cursor = null;
+			div.innerHTML = null;
+		}
 	}, 1200);
 }
