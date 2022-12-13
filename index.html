@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link
+			href="https://fonts.googleapis.com/css?family=Lato"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
 		<script type="text/javascript" src="main.js"></script>
-		<title>Click Game</title>
+		<title>Xmas Game</title>
 		<style>
+			body {
+				font-family: Mountains of Christmas;
+			}
+
 			#grid {
 				display: grid;
 				grid-template-columns: repeat(6, 1fr);
 				grid-gap: 12px;
-				/* background-color: #cd0; */
 				width: 400px;
 			}
 
 			#grid > div {
 				width: 100px;
 				height: 100px;
-				background-color: #ccc;
+				background-color: #e00;
 				border-radius: 8px;
 			}
 
 			#grid > div > img {
-				width: 90px;
-				height: 90px;
-				margin-left: 5px;
-				margin-top: 5px;
-				border-radius: 8px;
+				width: 92px;
+				height: 92px;
+				margin-left: 4px;
+				margin-top: 4px;
+				border-radius: 24px;
 			}
 		</style>
 	</head>
 	<body onLoad="load()">
-		<h1>Click Game</h1>
+		<h1><span style="font-size: 48px">X</span>mas Game</h1>
 		<p>Click on the images as quickly as you can!</p>
+		<div class="score-container">Christs removed: <span id="score"></span></div>
 		<div id="grid"></div>
 	</body>
 </html>

@@ -25,7 +25,7 @@ function load() {
 					score--;
 					score = Math.max(0, score);
 				}
-				document.querySelector('h1').innerText = `Score: ${score}`;
+				document.getElementById('score').innerText = score;
 				div.innerHTML = null;
 				div.style.cursor = null;
 			}
