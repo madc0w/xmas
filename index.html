@@ -41,6 +41,15 @@
 				div.id = `cell-${i}`;
 				// div.style.backgroundImage = `url(${images[0]})`;
 				grid.appendChild(div);
+				div.addEventListener('click', () => {
+					// console.log(div.style.backgroundImage);
+					if (div.style.backgroundImage) {
+						score++;
+						document.querySelector('h1').innerText = `Score: ${score}`;
+						div.style.backgroundImage = null;
+						div.style.cursor = null;
+					}
+				});
 			}
 
 			let score = 0;
@@ -52,16 +61,10 @@
 				const div = document.getElementById(`cell-${cellIndex}`);
 				div.style.backgroundImage = `url(${image})`;
 				div.style.cursor = 'pointer';
-				div.addEventListener('click', () => {
-					score++;
-					document.querySelector('h1').innerText = `Score: ${score}`;
-					div.style.backgroundImage = null;
-					div.style.cursor = null;
-				});
 				setTimeout(() => {
 					div.style.backgroundImage = null;
 					div.style.cursor = null;
-				}, 800);
+				}, 1200);
 			}
 
 			setInterval(showImage, 400);
