@@ -14,6 +14,7 @@
 				width: 100px;
 				height: 100px;
 				background-color: #ccc;
+				border-radius: 8px;
 			}
 		</style>
 	</head>
@@ -50,13 +51,16 @@
 				const cellIndex = Math.floor(Math.random() * numCells);
 				const div = document.getElementById(`cell-${cellIndex}`);
 				div.style.backgroundImage = `url(${image})`;
+				div.style.cursor = 'pointer';
 				div.addEventListener('click', () => {
 					score++;
 					document.querySelector('h1').innerText = `Score: ${score}`;
 					div.style.backgroundImage = null;
+					div.style.cursor = null;
 				});
 				setTimeout(() => {
 					div.style.backgroundImage = null;
+					div.style.cursor = null;
 				}, 800);
 			}
 
