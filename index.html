@@ -5,8 +5,10 @@
 		<style>
 			#grid {
 				display: grid;
-				grid-template-columns: repeat(8, 1fr);
-				grid-gap: 5px;
+				grid-template-columns: repeat(6, 1fr);
+				grid-gap: 12px;
+				/* background-color: #cd0; */
+				width: 400px;
 			}
 			#grid > div {
 				width: 100px;
@@ -32,25 +34,33 @@
 				'https://picsum.photos/id/8/100/100',
 			];
 
-			let score = 0;
-			function showImage() {
-				const randomIndex = Math.floor(Math.random() * images.length);
-				const image = images[randomIndex];
-
+			const numCells = 6 * 6;
+			for (let i = 0; i < numCells; i++) {
 				const div = document.createElement('div');
-				div.style.backgroundImage = `url(${image})`;
-				div.addEventListener('click', function () {
-					score++;
-					document.querySelector('h1').innerText = `Score: ${score}`;
-					div.remove();
-				});
+				div.id = `cell-${i}`;
+				// div.style.backgroundImage = `url(${images[0]})`;
 				grid.appendChild(div);
-				setTimeout(function () {
-					div.remove();
-				}, 1000);
 			}
 
-			setInterval(showImage, 500);
+			let score = 0;
+			function showImage() {
+				const imageIndex = Math.floor(Math.random() * images.length);
+				const image = images[imageIndex];
+
+				const cellIndex = Math.floor(Math.random() * numCells);
+				const div = document.getElementById(`cell-${cellIndex}`);
+				div.style.backgroundImage = `url(${image})`;
+				div.addEventListener('click', () => {
+					score++;
+					document.querySelector('h1').innerText = `Score: ${score}`;
+					div.style.backgroundImage = null;
+				});
+				setTimeout(() => {
+					div.style.backgroundImage = null;
+				}, 800);
+			}
+
+			setInterval(showImage, 400);
 		</script>
 	</body>
 </html>
