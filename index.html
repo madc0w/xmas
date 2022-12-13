@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script type="text/javascript" src="main.js"></script>
 		<title>Click Game</title>
 		<style>
 			#grid {
@@ -10,64 +11,26 @@
 				/* background-color: #cd0; */
 				width: 400px;
 			}
+
 			#grid > div {
 				width: 100px;
 				height: 100px;
 				background-color: #ccc;
 				border-radius: 8px;
 			}
+
+			#grid > div > img {
+				width: 90px;
+				height: 90px;
+				margin-left: 5px;
+				margin-top: 5px;
+				border-radius: 8px;
+			}
 		</style>
 	</head>
-	<body>
+	<body onLoad="load()">
 		<h1>Click Game</h1>
 		<p>Click on the images as quickly as you can!</p>
 		<div id="grid"></div>
-		<script>
-			const grid = document.querySelector('#grid');
-			const images = [
-				'https://picsum.photos/id/1/100/100',
-				'https://picsum.photos/id/2/100/100',
-				'https://picsum.photos/id/3/100/100',
-				'https://picsum.photos/id/4/100/100',
-				'https://picsum.photos/id/5/100/100',
-				'https://picsum.photos/id/6/100/100',
-				'https://picsum.photos/id/7/100/100',
-				'https://picsum.photos/id/8/100/100',
-			];
-
-			const numCells = 6 * 6;
-			for (let i = 0; i < numCells; i++) {
-				const div = document.createElement('div');
-				div.id = `cell-${i}`;
-				// div.style.backgroundImage = `url(${images[0]})`;
-				grid.appendChild(div);
-				div.addEventListener('click', () => {
-					// console.log(div.style.backgroundImage);
-					if (div.style.backgroundImage) {
-						score++;
-						document.querySelector('h1').innerText = `Score: ${score}`;
-						div.style.backgroundImage = null;
-						div.style.cursor = null;
-					}
-				});
-			}
-
-			let score = 0;
-			function showImage() {
-				const imageIndex = Math.floor(Math.random() * images.length);
-				const image = images[imageIndex];
-
-				const cellIndex = Math.floor(Math.random() * numCells);
-				const div = document.getElementById(`cell-${cellIndex}`);
-				div.style.backgroundImage = `url(${image})`;
-				div.style.cursor = 'pointer';
-				setTimeout(() => {
-					div.style.backgroundImage = null;
-					div.style.cursor = null;
-				}, 1200);
-			}
-
-			setInterval(showImage, 400);
-		</script>
 	</body>
 </html>
