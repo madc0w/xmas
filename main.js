@@ -13,6 +13,7 @@ const badImages = [
 	'happy holidays small.webp',
 	'jingle-bells small.jpg',
 	'snowflake small.jpg',
+	'st nic small.png',
 ];
 const sounds = {
 	gameOver: new Audio('sounds/xmas at ground zero.mp3'),
