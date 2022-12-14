@@ -1,10 +1,18 @@
-const goodImages = ['jesus1 small.jpg', 'jesus2 small.jpg', 'Jesus3 small.jpg'];
+const goodImages = [
+	'jesus1 small.jpg',
+	'jesus2 small.jpg',
+	'Jesus3 small.jpg',
+	'jesus on a dino small.webp',
+	'jesus on a dino 2 small.png',
+];
 const badImages = [
 	'santa small.jpg',
 	'xmas presents 1 small.jpg',
 	'xmas tree 1 small.png',
 	'seasons greetings small.jpg',
 	'happy holidays small.webp',
+	'jingle-bells small.jpg',
+	'snowflake small.jpg',
 ];
 const sounds = {
 	gameOver: new Audio('sounds/xmas at ground zero.mp3'),
@@ -145,4 +153,8 @@ function play(soundName) {
 		sounds[key].currentTime = 0;
 	}
 	sounds[soundName].play();
+}
+
+function playAgain() {
+	location.href = location.href;
 }
