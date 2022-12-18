@@ -19,9 +19,17 @@ const sounds = {
 	gameOver: new Audio('sounds/xmas at ground zero.mp3'),
 	nuke: new Audio('sounds/nuke.mp3'),
 	badClick: new Audio('sounds/naughty naughty.mp3'),
+	badImage: [
+		new Audio('sounds/copeland - in the name of jesus.mp3'),
+		new Audio('sounds/betty bowers - glory.mp3'),
+		new Audio('sounds/paula white - in the name of jesus.mp3'),
+		new Audio('sounds/monty python - dona eis requiem.mp3'),
+		new Audio('sounds/hallelujah.mp3'),
+		new Audio('sounds/joel olsteen - in jesus name.mp3'),
+	],
 };
 
-const goodRatio = 0.2;
+const badRatio = 0.2;
 const numCells = 6 * 6;
 const maxScore = 12;
 
@@ -52,7 +60,7 @@ function load() {
 				div.style.cursor = null;
 				const img2 = new Image();
 				if (goodImages.includes(imgSrc.substring('img/'.length))) {
-					play('nuke');
+					play(sounds.nuke);
 					score++;
 					img2.src = 'img/mushroom-cloud.gif';
 					// img2.style.position = 'relative';
@@ -73,13 +81,13 @@ function load() {
 
 					if (score >= maxScore) {
 						clearInterval(mainLoopIntervalId);
-						play('gameOver');
+						play(sounds.gameOver);
 						document
 							.getElementById('game-over-modal')
 							.classList.remove('hidden');
 					}
 				} else {
-					play('badClick');
+					play(sounds.badClick);
 					score = Math.max(0, score - 1);
 					img2.src = 'img/Sad-Santa small.jpg';
 				}
@@ -101,10 +109,14 @@ function showImage() {
 	if (div.firstChild) {
 		return showImage();
 	}
-
-	const images = Math.random() < goodRatio ? goodImages : badImages;
+	const isBadImage = Math.random() < badRatio;
+	const images = isBadImage ? goodImages : badImages;
 	const imageIndex = Math.floor(Math.random() * images.length);
 	const image = images[imageIndex];
+
+	if (isBadImage) {
+		play(sounds.badImage[Math.floor(Math.random() * sounds.badImage.length)]);
+	}
 
 	const img = new Image();
 	img.src = `img/${image}`;
@@ -148,12 +160,20 @@ function showScore() {
 	}
 }
 
-function play(soundName) {
+function play(sound) {
 	for (const key in sounds) {
-		sounds[key].pause();
-		sounds[key].currentTime = 0;
+		const sound = sounds[key];
+		if (Array.isArray(sound)) {
+			for (const s of sound) {
+				s.pause();
+				s.currentTime = 0;
+			}
+		} else {
+			sound.pause();
+			sound.currentTime = 0;
+		}
 	}
-	sounds[soundName].play();
+	sound.play();
 }
 
 function playAgain() {
