@@ -47,7 +47,13 @@ function load() {
 	});
 
 	showScore();
-	showModal('start-game-modal');
+
+	const url = new URL(location.href);
+	if (url.searchParams.get('play-again')) {
+		isPaused = false;
+	} else {
+		showModal('start-game-modal');
+	}
 	document.getElementById('max-score').innerText = maxScore;
 	const grid = document.querySelector('#grid');
 	for (let i = 0; i < numCells; i++) {
@@ -182,7 +188,14 @@ function play(sound) {
 }
 
 function playAgain() {
-	location.href = location.href;
+	// const url = new URL(location.href);
+	// url.searchParams.set('play-again', true);
+	// location.href = url.toString();
+	closeModals();
+	isPaused = false;
+	score = 0;
+	showScore();
+	mainLoopIntervalId = setInterval(showImage, 400);
 }
 
 function showModal(id) {
