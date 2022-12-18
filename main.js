@@ -26,6 +26,8 @@ const sounds = {
 		new Audio('sounds/monty python - dona eis requiem.mp3'),
 		new Audio('sounds/hallelujah.mp3'),
 		new Audio('sounds/joel olsteen - in jesus name.mp3'),
+		new Audio('sounds/tony evans - the holy spirit.mp3'),
+		new Audio('sounds/monty python - jesus christ.mp3'),
 	],
 };
 
@@ -35,6 +37,7 @@ const maxScore = 12;
 
 let score = 0;
 let mainLoopIntervalId;
+let isPaused = true;
 
 function load() {
 	document.body.addEventListener('keyup', (e) => {
@@ -44,6 +47,7 @@ function load() {
 	});
 
 	showScore();
+	showModal('start-game-modal');
 	document.getElementById('max-score').innerText = maxScore;
 	const grid = document.querySelector('#grid');
 	for (let i = 0; i < numCells; i++) {
@@ -82,9 +86,7 @@ function load() {
 					if (score >= maxScore) {
 						clearInterval(mainLoopIntervalId);
 						play(sounds.gameOver);
-						document
-							.getElementById('game-over-modal')
-							.classList.remove('hidden');
+						showModal('game-over-modal');
 					}
 				} else {
 					play(sounds.badClick);
@@ -104,6 +106,9 @@ function load() {
 }
 
 function showImage() {
+	if (isPaused) {
+		return;
+	}
 	const cellIndex = Math.floor(Math.random() * numCells);
 	const div = document.getElementById(`cell-${cellIndex}`);
 	if (div.firstChild) {
@@ -178,4 +183,12 @@ function play(sound) {
 
 function playAgain() {
 	location.href = location.href;
+}
+
+function showModal(id) {
+	document.getElementById(id).classList.remove('hidden');
+}
+
+function togglePause() {
+	isPaused = !isPaused;
 }
