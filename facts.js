@@ -19,4 +19,7 @@ const facts = [
 		'<li>The exchange of gifts dates back to the Roman Sigillaria (and later, Saturnalia) festivities. No Magi were involved.</li>' +
 		'<li>Santa Claus was a pagan god, probably Saturn, who drove a sleigh drawn by reindeer.</li>' +
 		'</ul>',
+
+	'Christmas was <a href="http://www.beggarscanbechoosers.com/2006/12/how-did-americas-founding-fathers-feel.html">not established as a national holiday in the USA</a> while any of its founding fathers were alive.<br/>' +
+		"The U.S. government didn't recognize Christmas as a holiday until 1870. Until then, it was just another workday.",
 ];
