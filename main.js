@@ -227,9 +227,11 @@ function playAgain() {
 }
 
 function showModal(id) {
-	isPaused = true;
 	closeModals();
-	document.getElementById(id).classList.remove('hidden');
+	isPaused = true;
+	setTimeout(() => {
+		document.getElementById(id).classList.remove('hidden');
+	}, 0);
 }
 
 function togglePause() {
