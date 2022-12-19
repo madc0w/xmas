@@ -44,7 +44,7 @@ let mainLoopIntervalId;
 let isPaused = true;
 
 function load() {
-	// document.getElementById('test').innerHTML = '&rho;';
+	preload();
 	document.body.addEventListener('keyup', (e) => {
 		if (e.code == 'Escape') {
 			closeModals();
@@ -237,4 +237,11 @@ function showModal(id) {
 
 function togglePause() {
 	isPaused = !isPaused;
+}
+
+function preload() {
+	for (const filename of goodImages.concat(badImages)) {
+		const img = new Image();
+		img.src = `img/${filename}`;
+	}
 }
