@@ -1,6 +1,6 @@
 const badRatio = 0.2;
 const factModalProbability = 0.3;
-const numCells = 6 * 6;
+const numCells = 5 * 5;
 const maxScore = 12;
 
 let shownFactIndexes = [];
@@ -105,11 +105,12 @@ function load() {
 					let sizeFactor = 1;
 					let opacity = 100;
 					const intervalId = setInterval(() => {
+						const size = 92;
 						img2.style.opacity = `${opacity}%`;
-						img2.style.width = `${72 * sizeFactor}px`;
-						img2.style.height = `${72 * sizeFactor}px`;
-						img2.style.marginTop = `-${36 * (sizeFactor - 1)}px`;
-						img2.style.marginLeft = `-${36 * (sizeFactor - 1)}px`;
+						img2.style.width = `${size * sizeFactor}px`;
+						img2.style.height = `${size * sizeFactor}px`;
+						img2.style.marginTop = `-${(size / 2) * (sizeFactor - 1)}px`;
+						img2.style.marginLeft = `-${(size / 2) * (sizeFactor - 1)}px`;
 						opacity -= 1;
 						sizeFactor *= 1.008;
 						if (opacity < 40) {
