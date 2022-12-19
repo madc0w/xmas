@@ -1,3 +1,9 @@
+const badRatio = 0.2;
+const factModalProbability = 0.3;
+const numCells = 6 * 6;
+const maxScore = 12;
+
+let shownFactIndexes = [];
 const goodImages = [
 	'jesus1 small.jpg',
 	'jesus2 small.jpg',
@@ -33,15 +39,12 @@ const sounds = {
 	],
 };
 
-const badRatio = 0.2;
-const numCells = 6 * 6;
-const maxScore = 12;
-
 let score = 0;
 let mainLoopIntervalId;
 let isPaused = true;
 
 function load() {
+	// document.getElementById('test').innerHTML = '&rho;';
 	document.body.addEventListener('keyup', (e) => {
 		if (e.code == 'Escape') {
 			closeModals();
@@ -56,6 +59,10 @@ function load() {
 	} else {
 		showModal('start-game-modal');
 	}
+
+	document.getElementById('fact-text').innerHTML = facts[3];
+	showModal('fact-modal');
+
 	document.getElementById('max-score').innerText = maxScore;
 	const grid = document.querySelector('#grid');
 	for (let i = 0; i < numCells; i++) {
@@ -63,6 +70,25 @@ function load() {
 		div.id = `cell-${i}`;
 		// div.style.backgroundSize = '100px 100px';
 		grid.appendChild(div);
+
+		div.addEventListener('mouseup', () => {
+			const img = div.firstChild;
+			if (img) {
+				if (Math.random() < factModalProbability) {
+					if (shownFactIndexes.length == facts.length) {
+						shownFactIndexes = [];
+					}
+					let factIndex;
+					do {
+						factIndex = Math.floor(Math.random() * facts.length);
+					} while (shownFactIndexes.includes(factIndex));
+					shownFactIndexes.push(factIndex);
+					const fact = facts[factIndex];
+					document.getElementById('fact-text').innerHTML = fact;
+					showModal('fact-modal');
+				}
+			}
+		});
 		div.addEventListener('mousedown', () => {
 			// console.log(div.style.backgroundImage);
 			const img = div.firstChild;
@@ -201,6 +227,8 @@ function playAgain() {
 }
 
 function showModal(id) {
+	isPaused = true;
+	closeModals();
 	document.getElementById(id).classList.remove('hidden');
 }
 

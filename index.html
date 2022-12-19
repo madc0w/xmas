@@ -12,6 +12,7 @@
 			href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap"
 			rel="stylesheet"
 		/>
+		<script type="text/javascript" src="facts.js"></script>
 		<script type="text/javascript" src="main.js"></script>
 		<title>Xmas Game</title>
 		<style>
@@ -68,11 +69,15 @@
 				font-size: 32px;
 			}
 
+			a {
+				color: red;
+			}
+
 			.modal {
 				position: absolute;
 				top: 10%;
 				left: calc(50% - 150px);
-				height: 200px;
+				height: auto;
 				width: 300px;
 				border-radius: 8px;
 				border-style: dotted;
@@ -95,7 +100,16 @@
 				text-align: center;
 			}
 
+			/* thx https://stackoverflow.com/questions/7614928/change-br-height-using-css */
+			.modal-content br {
+				font-size: 40%;
+				display: block;
+				margin: 2em;
+				content: '';
+			}
+
 			.modal-button {
+				color: white;
 				text-align: center;
 				background-color: red;
 				width: 100px;
@@ -110,12 +124,44 @@
 			}
 
 			.modal-button:hover {
+				color: black;
 				background-color: #f66;
 			}
 
 			.hidden {
 				display: none;
 			}
+
+			#fact-modal {
+				width: 70%;
+				left: 15%;
+			}
+
+			#fact-modal .modal-button {
+				width: 50%;
+				margin-left: 25%;
+			}
+
+			#xmas-greek {
+				text-align: center;
+				font-size: 160%;
+				font-weight: bold;
+			}
+
+			li {
+				margin: 12px;
+				padding-left: 36px;
+				list-style: none;
+				background-image: url('img/holly.png');
+				background-repeat: no-repeat;
+				background-position: left center;
+				background-size: 28px;
+			}
+
+			/* 
+			ul {
+				list-style-image: url('img/holly.png');
+			} */
 		</style>
 	</head>
 	<body onLoad="load()">
@@ -149,10 +195,26 @@
 		<div class="modal hidden" id="start-game-modal">
 			<div class="modal-content">
 				<div class="header">Start Game</div>
-				<div class="body">Click the Jesus to eliminate him from Xmas.</div>
+				<div class="body">
+					Click the Jesus to eliminate him from Xmas.<br />
+					<b>Be sure to crank the sound to 11 so the neighbors can hear you!</b>
+				</div>
 			</div>
 			<div class="modal-button" onClick="closeModals(); togglePause();">
-				Let's put the X in Xmas!
+				Let's go!
+			</div>
+		</div>
+
+		<div class="modal hidden" id="fact-modal">
+			<div class="modal-content">
+				<div class="header">Did You Know?</div>
+				<div class="body" id="fact-text"></div>
+			</div>
+			<div class="modal-button" onClick="closeModals(); togglePause();">
+				Yes, I knew that.
+			</div>
+			<div class="modal-button" onClick="closeModals(); togglePause();">
+				I learned something today!
 			</div>
 		</div>
 	</body>
