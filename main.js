@@ -28,6 +28,8 @@ const sounds = {
 		new Audio('sounds/joel olsteen - in jesus name.mp3'),
 		new Audio('sounds/tony evans - the holy spirit.mp3'),
 		new Audio('sounds/monty python - jesus christ.mp3'),
+		new Audio('sounds/pat robertson - praise the lord.mp3'),
+		new Audio('sounds/pat robertson - halleluja.mp3'),
 	],
 };
 
