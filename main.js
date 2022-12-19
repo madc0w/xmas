@@ -60,8 +60,8 @@ function load() {
 		showModal('start-game-modal');
 	}
 
-	document.getElementById('fact-text').innerHTML = facts[3];
-	showModal('fact-modal');
+	// document.getElementById('fact-text').innerHTML = facts[3];
+	// showModal('fact-modal');
 
 	document.getElementById('max-score').innerText = maxScore;
 	const grid = document.querySelector('#grid');
