@@ -1,9 +1,10 @@
 const badRatio = 0.2;
 const factModalProbability = 0.3;
-const numCells = 5 * 5;
+const gridSide = 5;
 const maxScore = 12;
 
 let shownFactIndexes = [];
+const disappointedSanta = 'img/Sad-Santa small.jpg';
 const goodImages = [
 	'jesus1 small.jpg',
 	'jesus2 small.jpg',
@@ -39,6 +40,7 @@ const sounds = {
 		new Audio('sounds/pat robertson - halleluja.mp3'),
 	],
 };
+let gridWidth, cellSize;
 
 let score = 0;
 let mainLoopIntervalId;
@@ -64,12 +66,20 @@ function load() {
 	// document.getElementById('fact-text').innerHTML = facts[3];
 	// showModal('fact-modal');
 
+	const headerHeight = parseInt(
+		document.defaultView.getComputedStyle(
+			document.getElementById('header-container')
+		).height
+	);
+	gridWidth = Math.min(innerHeight - headerHeight, innerWidth) * 0.82;
+	cellSize = Math.floor(gridWidth / gridSide);
 	document.getElementById('max-score').innerText = maxScore;
 	const grid = document.querySelector('#grid');
-	for (let i = 0; i < numCells; i++) {
+	for (let i = 0; i < gridSide * gridSide; i++) {
 		const div = document.createElement('div');
 		div.id = `cell-${i}`;
-		// div.style.backgroundSize = '100px 100px';
+		div.className = 'cell';
+		div.style.width = div.style.height = `${cellSize}px`;
 		grid.appendChild(div);
 
 		div.addEventListener('mouseup', () => {
@@ -98,6 +108,7 @@ function load() {
 				div.innerHTML = null;
 				div.style.cursor = null;
 				const img2 = new Image();
+				const size = cellSize - 8;
 				if (goodImages.includes(imgSrc.substring('img/'.length))) {
 					play(sounds.nuke);
 					score++;
@@ -106,7 +117,6 @@ function load() {
 					let sizeFactor = 1;
 					let opacity = 100;
 					const intervalId = setInterval(() => {
-						const size = 92;
 						img2.style.opacity = `${opacity}%`;
 						img2.style.width = `${size * sizeFactor}px`;
 						img2.style.height = `${size * sizeFactor}px`;
@@ -127,7 +137,9 @@ function load() {
 				} else {
 					play(sounds.badClick);
 					score = Math.max(0, score - 1);
-					img2.src = 'img/Sad-Santa small.jpg';
+					img2.style.width = `${size}px`;
+					img2.style.height = `${size}px`;
+					img2.src = disappointedSanta;
 				}
 				div.appendChild(img2);
 				setTimeout(() => {
@@ -145,7 +157,7 @@ function showImage() {
 	if (isPaused) {
 		return;
 	}
-	const cellIndex = Math.floor(Math.random() * numCells);
+	const cellIndex = Math.floor(Math.random() * gridSide * gridSide);
 	const div = document.getElementById(`cell-${cellIndex}`);
 	if (div.firstChild) {
 		return showImage();
@@ -160,6 +172,8 @@ function showImage() {
 	}
 
 	const img = new Image();
+	img.style.width = `${cellSize - 8}px`;
+	img.style.height = `${cellSize - 8}px`;
 	img.src = `img/${image}`;
 	let opacity = 20;
 	img.style.opacity = `${opacity}%`;
@@ -245,4 +259,5 @@ function preload() {
 		const img = new Image();
 		img.src = `img/${filename}`;
 	}
+	new Image().src = disappointedSanta;
 }
